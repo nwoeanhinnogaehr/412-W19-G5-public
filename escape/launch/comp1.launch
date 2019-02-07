@@ -1,0 +1,18 @@
+<launch>
+
+    <arg name="use_camera" default="true" />
+    <arg name="use_turtlebot" default="true" />
+    <arg name="use_velocity_smoother" default="true" />
+
+    <include if="$(arg use_velocity_smoother)" file="$(find turtlebot_teleop)/launch/includes/velocity_smoother.launch.xml"/>
+    <include if="$(arg use_turtlebot)" file="$(find turtlebot_bringup)/launch/minimal.launch"/>
+    <include if="$(eval arg('use_turtlebot') and arg('use_camera'))" file="$(find turtlebot_bringup)/launch/3dsensor.launch"/>
+    <include unless="$(arg use_turtlebot)" file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
+        <arg name="world_file" value="$(find escape)/worlds/test2.sdf"/>
+    </include>
+    <node pkg="joy" type="joy_node" name="joystick"/>
+
+    <node pkg="escape" name="escape" type="escape.py" args="cmd_vel:=teleop_velocity_smoother/raw_cmd_vel" output="screen">
+    </node>
+
+</launch>
