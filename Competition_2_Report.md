@@ -48,12 +48,21 @@ Once you have the package in your workspace, you can execute it using the follow
 
 ### Concepts & Code
 
-#### Line Following
+##### Line Following
 
-#### Stopping
+##### Stopping
+Since the course is unchanging, we used a global index to keep track of the current location of the turtlebot. 
+This way it knows what line it's apporaching next in order to take the appropriate action. If it's a line it
+needs to stop at it will do so, but if it's a line it needs to turn at it will delay stopping till the turtlebot
+is directly overtop of the line then it will stop and turn accordingly. Lastly, at location 2 there is no red line.
+To stop correctly, the turtlbot uses its laserscanner to check to see if the average distance in front of it is less 
+then 1.1 metre. If this condition is satisfied, the turtlebot stops and knows it's at location 2.<br/>
 
-#### Location 1
+To detect a red line, the camera looks for a certain amount of red in its line of sight. If this threshold is reached,
+the turtlebot asummes it has reached a red line and stops accordingly.
 
-#### Location 2
+##### Location 1
+At location 1, we used two differnt implementations to detect how many objects were in front. The first one used the data from the laser scanner to run the get_objects() function. This function takes the laserscanner data and returns a list of ranges for each object found that was above the size of 60 units wide. The second implementation used the detect(image, color, cutoff=7000) function from the shape_detect library we made which returned the number of red objects that were found from the camera of the turtlebot. Though we found some inconsistances in both implementations, we decided to used the color detection implemtation for the competition. 
+##### Location 2
 
-#### Location 3
+##### Location 3
