@@ -37,7 +37,7 @@ This project runs on Ubuntu 16.04 with ROS Kenetic installed.
 Dependencies: `numpy`, `rospy`, `smach`, `smach_ros`, `cv2`, `cv_bridge`, `tf.transformations`, `imutils`,
 `subprocess`
 
-Installation Instructions: Download the packages `comp2` from this github repo
+Installation Instructions: Download the package `comp2` from this github repo
 and place them in your workspace.
 
 ### Execution
@@ -48,4 +48,12 @@ Once you have the package in your workspace, you can execute it using the follow
 
 ### Concepts & Code
 
-TODO
+#### Line Following
+
+#### Stopping
+
+#### Location 1
+
+#### Location 2
+
+#### Location 3
