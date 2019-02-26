@@ -34,7 +34,8 @@ at location 2. The following is an example of a single stop at location 3.
 
 This project runs on Ubuntu 16.04 with ROS Kenetic installed.
 
-Dependencies: `numpy`, `ros_numpy`, `smach`, `smach_ros`
+Dependencies: `numpy`, `rospy`, `smach`, `smach_ros`, `cv2`, `cv_bridge`, `tf.transformations`, `imutils`,
+`subprocess`
 
 Installation Instructions: Download the packages `comp2` from this github repo
 and place them in your workspace.
