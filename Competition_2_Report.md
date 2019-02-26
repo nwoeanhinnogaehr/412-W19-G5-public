@@ -36,31 +36,15 @@ This project runs on Ubuntu 16.04 with ROS Kenetic installed.
 
 Dependencies: `numpy`, `ros_numpy`, `smach`, `smach_ros`
 
-Installation Instructions: Download the packages `follow` and `escape` from this github repo
+Installation Instructions: Download the packages `comp2` from this github repo
 and place them in your workspace.
 
 ### Execution
 
-Once you have the two packages in your workspace, you can execute an instance
-of either type by using the commands:
+Once you have the package in your workspace, you can execute it using the following command:
 
-* Cop/Follow - `$ roslaunch follow comp1.launch`
-* Robber/Escape - `$ roslaunch escape comp1.launch`
-
-The following argument exist for either instance:
-
-* `use_camera` - true if you are not using simulator, default: true
-* `use_turtlebot` - true if you are not using simulator, default: false
-* `use_velocity_smoother` - true if you want to use velocity_smoother package for the turtlebot, default: true
+`$ roslaunch comp2 course.launch`
 
 ### Concepts & Code
 
-The escape instance uses it's laser scan sensors and bumper sensors
-to manuver around it's enviroment intellegenctly avoiding obstacles or walls it can
-see in its range. The follow instance uses data from the laserscan/pointcloud to
-detect any near objects, and move toward the object with the highest score evaluated
-by:
-
-1. the objects coordinates in relation to the previously tracked object
-2. the size of the object
-3. the average color of the object
+TODO
