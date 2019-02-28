@@ -64,12 +64,14 @@ To detect a red line, the camera looks for a certain amount of red in its line o
 the turtlebot asummes it has reached a red line and stops accordingly.
 
 ##### Location 1
-At location 1, we used two differnt implementations to detect how many objects were in front. The first one used the data from the laser scanner to run the get_objects() function. This function takes the laserscanner data and returns a list of ranges for each object found that was above the size of 60 units wide. The second implementation used the detect(image, color, cutoff=7000) function from the shape_detect library we made which returned the number of red objects that were found from the camera of the turtlebot. Though we found some inconsistances in both implementations, we decided to used the color detection implemtation for the competition. 
+At location 1, we used two differnt implementations to detect how many objects were in front. The first one used the data from the laser scanner to run the get_objects() function. This function takes the laserscanner data and returns a list of ranges for each object found that was above the size of 60 units wide. The second implementation used the detect(image, color, cutoff=7000) function from the shape_detect library we made which returned the number of red objects that were found from the camera of the turtlebot. Though we found some inconsistances in both implementations, we decided to used the color detection implementation for the competition. 
 ##### Location 2
 
 ##### Location 3
 
 ### State Diagram
+
+Our package uses Smach to base our robots behavior off a state machine. Run `rosrun smach_viewer smach_viewer.py` while the robot is running to get a live view of the state diagram as shown below
 
 ![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/smach.png?raw=true)
 
