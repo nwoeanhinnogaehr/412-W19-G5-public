@@ -46,7 +46,7 @@ and place them in your workspace.
 
 Once you have the package in your workspace, you can execute it using the following command:
 
-`$ roslaunch comp2 course.launch`
+`$ roslaunch comp2 robot.launch`
 
 ### Concepts & Code
 
