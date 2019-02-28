@@ -1,6 +1,8 @@
 Competition Report 2 - CMPUT 412
 ================================
 
+##### Video Demo - https://youtu.be/CbxRTOG_1IA
+
 ### Purpose
 
 This project can be used to to navigate a turtlebot around the following course, and count/detect 
@@ -66,3 +68,9 @@ At location 1, we used two differnt implementations to detect how many objects w
 ##### Location 2
 
 ##### Location 3
+
+### State Diagram
+
+![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/smach.png?raw=true)
+
+
