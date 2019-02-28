@@ -48,6 +48,12 @@ Once you have the package in your workspace, you can execute it using the follow
 
 `$ roslaunch comp2 robot.launch`
 
+The following arguments exist when executing the package:
+
+* `use_camera` - true if you are not using simulator, default: true
+* `use_turtlebot` - true if you are not using simulator, default: false
+* `use_velocity_smoother` - true if you want to use velocity_smoother package for the turtlebot, default: true
+
 ### Concepts & Code
 
 ##### Line Following
@@ -74,5 +80,9 @@ At location 1, we used two differnt implementations to detect how many objects w
 Our package uses Smach to base our robots behavior off a state machine. Run `rosrun smach_viewer smach_viewer.py` while the robot is running to get a live view of the state diagram as shown below
 
 ![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/smach.png?raw=true)
+
+### References
+
+https://github.com/osrf/rosbook/blob/master/followbot/follower_p.py
 
 
