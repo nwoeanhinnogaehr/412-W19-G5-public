@@ -70,10 +70,14 @@ To detect a red line, the camera looks for a certain amount of red in its line o
 the turtlebot asummes it has reached a red line and stops accordingly.
 
 ##### Location 1
-At location 1, we used two differnt implementations to detect how many objects were in front. The first one used the data from the laser scanner to run the get_objects() function. This function takes the laserscanner data and returns a list of ranges for each object found that was above the size of 60 units wide. The second implementation used the detect(image, color, cutoff=7000) function from the shape_detect library we made which returned the number of red objects that were found from the camera of the turtlebot. Though we found some inconsistances in both implementations, we decided to used the color detection implementation for the competition. 
+At location 1, we used two different implementations to detect how many objects were in front. The first one used the data from the laser scanner to run the get_objects() function. This function takes the laserscanner data and returns a list of ranges for each object found that was above the size of 60 units wide. The second implementation used the detect(image, color, cutoff=7000) function from the shape_detect library we made which returned the number of red objects that were found from the camera of the turtlebot. 7000 is the minimum number of pixels in a region for it to be counted. Though we found some inconsistances in both implementations, we decided to used the color detection implementation for the competition. 
+
 ##### Location 2
+At location two, the shapes are detected using the camera. When the robot reaches the end of the line, it turns slightly to center itself, then based on a single frame from the camera will seperately detect the green and red shapes. It stores the detected green shape in a global value so that it can be compared against the shapes at location 3. All shape detection is done using the `shape_detect` module, using a cutoff of 7000. 
 
 ##### Location 3
+
+### Shape detect module
 
 ### State Diagram
 
