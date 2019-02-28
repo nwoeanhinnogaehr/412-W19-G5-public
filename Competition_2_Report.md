@@ -50,8 +50,8 @@ Once you have the package in your workspace, you can execute it using the follow
 
 The following arguments exist when executing the package:
 
-* `use_camera` - true if you are not using simulator, default: true
-* `use_turtlebot` - true if you are not using simulator, default: false
+* `use_camera` - true if you are not using simulator, default: false
+* `use_turtlebot` - true if you are not using simulator, default: true
 * `use_velocity_smoother` - true if you want to use velocity_smoother package for the turtlebot, default: true
 
 ### Concepts & Code
