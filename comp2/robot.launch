@@ -1,17 +1,14 @@
 <launch>
 
-    <arg name="use_camera" default="false" />
     <arg name="use_turtlebot" default="true" />
     <arg name="use_velocity_smoother" default="true" />
 
     <include if="$(arg use_velocity_smoother)" file="$(find turtlebot_teleop)/launch/includes/velocity_smoother.launch.xml"/>
-    <include if="$(arg use_camera)" file="$(find openni2_launch)/launch/openni2.launch"/>
     <include if="$(arg use_turtlebot)" file="$(find turtlebot_bringup)/launch/minimal.launch"/>
     <include if="$(arg use_turtlebot)" file="$(find turtlebot_bringup)/launch/3dsensor.launch"/>
     <include unless="$(arg use_turtlebot)" file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
         <arg name="world_file" value="$(find travel)/worlds/demo2.sdf"/>
     </include>
-    <node pkg="joy" type="joy_node" name="joystick"/>
 
     <node pkg="comp2" name="counter" type="counter.py" args="cmd_vel:=teleop_velocity_smoother/raw_cmd_vel" output="screen">
     </node>
