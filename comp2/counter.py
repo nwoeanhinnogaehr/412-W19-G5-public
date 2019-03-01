@@ -81,6 +81,7 @@ class Following(smach.State):
                     cmd_vel_pub.publish(twist)
                     self.stop_time = rospy.get_time() + 1
                     self.red_visible = 5
+                    # determine what to do at this location
                     if global_inx in [0, 2, 3, 6, 8, 10]:
                         target = -math.pi/2 # turn left 90 degrees
                         return 'turn'
@@ -93,7 +94,7 @@ class Following(smach.State):
 
 
                 else:
-                    # if any white line detected
+                    # if any white line detected, follow it
                     if white_moments['m00'] > 0:
 
                         # if red is still visible, decrement the red cooldown timer
@@ -137,6 +138,8 @@ class Turning(smach.State):
     def execute(self, userdata):
         global global_inx
         turn_turtlebot(target)
+
+        # determine what to do next based on location
         if global_inx == 0:
             return 'atL1'
         elif global_inx in [1,2,3,7,9,11]:
@@ -155,16 +158,17 @@ class Location1(smach.State):
         global target, global_inx
         drive_turtlebot(0, 0)
         target = math.pi/2 # turn right away from location1
+        # wait for turtlebot to stop
         stop_time = rospy.get_time() + 1
         while(rospy.get_time() < stop_time):
             pass
         rospy.wait_for_message('/scan', LaserScan)
-        # Scan objects with LaserScan
+        # Scan objects with shape detector
         num_of_objects = len(shape_detect.detect(hsv, "red", 1000))
-        if num_of_objects == 4:
+        if num_of_objects == 4: # HACK
             num_of_objects = 3
         #num_of_objects = len(get_objects(obj_ranges))
-        show_count(num_of_objects)
+        show_count(num_of_objects) # display on lights and sound
         print("NUMBER OF OBJECTS DETECTED AT LOCATION1: ", num_of_objects)
         global_inx += 1
         return 'done'
@@ -174,15 +178,17 @@ class Location2(smach.State):
         smach.State.__init__(self, outcomes=['done'])
     def execute(self, userdata):
         global target, global_inx, g_green_shape
-        turn_turtlebot(-math.pi/10)
+        turn_turtlebot(-math.pi/10) # correct angle a bit
+        # wait for turtlebot to stop
         stop_time = rospy.get_time() + 0.5
         while(rospy.get_time() < stop_time):
             pass
+        # detect shapes
         green_shapes = shape_detect.detect(hsv, "green", 1000)
         g_green_shape = green_shapes
         red_shapes = shape_detect.detect(hsv, "red", 1000)
-        num = min(3,len(green_shapes) + len(red_shapes))
-        show_count(num)
+        num = min(3,len(green_shapes) + len(red_shapes)) # HACK
+        show_count(num) # display on lights and sound
         print("green", green_shapes)
         print("red", red_shapes)
         print("NUMBER OF OBJECTS DETECTED AT LOCATION2: ", num)
@@ -196,13 +202,15 @@ class Location3(smach.State):
     def execute(self, userdata):
         global target, global_inx
         target = math.pi/2 # rotations back from location 3
-        turn_turtlebot(-math.pi/10)
+        turn_turtlebot(-math.pi/10) # fix angle
+        # wait for turtlebot to stop
         stop_time = rospy.get_time() + 0.5
         while(rospy.get_time() < stop_time):
             pass
+        # detect shape
         shapes = shape_detect.detect(hsv, "red", 7000)
         print("LOCATION3 SHAPES", shapes)
-        if g_green_shape[0] in shapes:
+        if g_green_shape[0] in shapes: # match with green shape from location2
             path=os.path.dirname(os.path.realpath(__file__))
             g_mpv = subprocess.Popen(['aplay', path+'/'+'checkpoint-hit.wav'])
 
@@ -221,6 +229,7 @@ def should_delay():
     else:
         return True
 
+# play a sound and show count on LEDs
 def show_count(num_of_objects):
     global g_mpv
     if num_of_objects <= 3:
@@ -242,6 +251,7 @@ def drive_turtlebot(linear_x, angular_z):
     twist.angular.z = angular_z
     cmd_vel_pub.publish(twist)
 
+# turn by angle, positive=clockwise
 def turn_turtlebot(angle):
     speed = 1.5
     start_angle = yaw
@@ -250,6 +260,7 @@ def turn_turtlebot(angle):
         drive_turtlebot(0,speed*(-1 if angle > 0 else 1))
     drive_turtlebot(0,0)
 
+# get list of objects in laser scan
 def get_objects(ranges):
     objects = []
     in_object = False
@@ -352,6 +363,7 @@ with sm:
 sis = smach_ros.IntrospectionServer('server_name', sm, '/SM_ROOT')
 sis.start()
 
+# wait for camera to auto adjust
 time.sleep(2)
 
 sm.execute()
