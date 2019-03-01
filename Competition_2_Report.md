@@ -58,6 +58,8 @@ The following arguments exist when executing the package:
 
 ### Concepts & Code
 
+The main code can be found in [counter.py](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/comp2/counter.py).
+
 ##### Line Following
 Line following behavior is based on the [followbot code](https://github.com/osrf/rosbook/blob/master/followbot/follower_p.py).
 Changes made were:
@@ -78,18 +80,22 @@ To detect a red line, the camera looks for a certain amount of red in its line o
 the turtlebot asummes it has reached a red line and stops accordingly.
 
 ##### Location 1
-At location 1, we used two different implementations to detect how many objects were in front. The first one used the data from the laser scanner to run the `get_objects()` function. This function takes the laserscanner data and returns a list of ranges for each object found that was above the size of 60 units wide. The second implementation used the `detect(image, color, cutoff=7000)` function from the `shape_detect` library we made which returned the number of red objects that were found from the camera of the turtlebot. 7000 is the minimum number of pixels in a region for it to be counted. Though we found some inconsistances in both implementations, we decided to used the color detection implementation for the competition. 
+At location 1, we used two different implementations to detect how many objects were in front. The first one used the data from the laser scanner to run the `get_objects()` function. This function takes the laserscanner data and returns a list of ranges for each object found that was above the size of 60 units wide. The second implementation used the `detect(image, color, cutoff=7000)` function from the `shape_detect` library we made which returned the number of red objects that were found from the camera of the turtlebot. 7000 is the minimum number of pixels in a region for it to be counted. Though we found some inconsistances in both implementations, we decided to used the color detection implementation for the competition. The robot will indicate the number of objects it found by playing a sound and turning on the LEDs.
 
 ##### Location 2
-At location 2, the shapes are detected using the camera. When the robot reaches the end of the line, it turns slightly to center itself, then based on a single frame from the camera will seperately detect the green and red shapes. It stores the detected green shape in a global value so that it can be compared against the shapes at location 3. All shape detection is done using the `shape_detect` module, using a cutoff of 7000. 
+At location 2, the shapes are detected using the camera. The robot detects when it should stop by measuring the distance to the billboard with the laser scanner. When the robot reaches the end of the line, it turns slightly to center itself, then based on a single frame from the camera it will seperately detect the green and red shapes. The total number of shapes detected will be indicated with a sound and by the LEDs. It stores the detected green shape in a global value so that it can be compared against the shapes at location 3. All shape detection is done using the `shape_detect` module. A cutoff of 1000 is used this time because the shapes are further away. Afterwards it turns around and drives back along the line until it reaches the main line.
 
 ##### Location 3
 
+Location 3 has 3 parts to it. The robot stops at each, turning 90 degrees to the left, and detects the red shape using the `shape_detect` module. A cutoff of 7000 is used, because the shapes are close up. If the shape matching the green shape from location 2 is found, the robot will make a "notification" sound. After the robot turns back to the main line, it backs up a bit so that it doesn't miss the next red line, which may have fallen outside the view region.
+
 ### Shape detect module
 
-Shape detection is loosely based on this tutorial: https://www.pyimagesearch.com/2016/02/08/opencv-shape-detection/
+Shape detection is based on this tutorial: https://www.pyimagesearch.com/2016/02/08/opencv-shape-detection/
 
-
+To use it, call the `detect` function from `shape_detect.py`. It is essentially a wrapper
+around the code from the tutorial, modified to support multiple colours and different
+detection thresholds.
 
 ### State Diagram
 
