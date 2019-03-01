@@ -2,6 +2,7 @@ Competition Report 2 - CMPUT 412
 ================================
 
 ##### Video Demo - https://youtu.be/CbxRTOG_1IA
+##### Source Code - https://github.com/nwoeanhinnogaehr/412-W19-G5-public/tree/master/comp2
 
 ### Purpose
 
@@ -37,7 +38,7 @@ at location 2. The following is an example of a single stop at location 3.
 This project runs on Ubuntu 16.04 with ROS Kenetic installed.
 
 Dependencies: `numpy`, `rospy`, `smach`, `smach_ros`, `cv2`, `cv_bridge`, `tf.transformations`, `imutils`,
-`subprocess`
+`aplay`
 
 Installation Instructions: Download the package `comp2` from this github repo
 and place them in your workspace.
@@ -48,15 +49,22 @@ Once you have the package in your workspace, you can execute it using the follow
 
 `$ roslaunch comp2 robot.launch`
 
+It is expected that the robot will start on the line just before the first location.
+
 The following arguments exist when executing the package:
 
-* `use_camera` - true if you are not using simulator, default: false
 * `use_turtlebot` - true if you are not using simulator, default: true
 * `use_velocity_smoother` - true if you want to use velocity_smoother package for the turtlebot, default: true
 
 ### Concepts & Code
 
 ##### Line Following
+Line following behavior is based on the [followbot code](https://github.com/osrf/rosbook/blob/master/followbot/follower_p.py).
+Changes made were:
+
+* Integration of a PID controller
+* Modification of colour mask to match the competition environment
+* Modification of the region mask to match our camera placement (closer to the ground than the default placement)
 
 ##### Stopping
 Since the course is unchanging, we used a global index to keep track of the current location of the turtlebot. 
@@ -64,20 +72,24 @@ This way it knows what line it's apporaching next in order to take the appropria
 needs to stop at it will do so, but if it's a line it needs to turn at it will delay stopping till the turtlebot
 is directly overtop of the line then it will stop and turn accordingly. Lastly, at location 2 there is no red line.
 To stop correctly, the turtlbot uses its laserscanner to check to see if the average distance in front of it is less 
-then 1.1 metre. If this condition is satisfied, the turtlebot stops and knows it's at location 2.<br/>
+then 1.1 metre. If this condition is satisfied, the turtlebot stops and knows it's at location 2.
 
 To detect a red line, the camera looks for a certain amount of red in its line of sight. If this threshold is reached,
 the turtlebot asummes it has reached a red line and stops accordingly.
 
 ##### Location 1
-At location 1, we used two different implementations to detect how many objects were in front. The first one used the data from the laser scanner to run the get_objects() function. This function takes the laserscanner data and returns a list of ranges for each object found that was above the size of 60 units wide. The second implementation used the detect(image, color, cutoff=7000) function from the shape_detect library we made which returned the number of red objects that were found from the camera of the turtlebot. 7000 is the minimum number of pixels in a region for it to be counted. Though we found some inconsistances in both implementations, we decided to used the color detection implementation for the competition. 
+At location 1, we used two different implementations to detect how many objects were in front. The first one used the data from the laser scanner to run the `get_objects()` function. This function takes the laserscanner data and returns a list of ranges for each object found that was above the size of 60 units wide. The second implementation used the `detect(image, color, cutoff=7000)` function from the `shape_detect` library we made which returned the number of red objects that were found from the camera of the turtlebot. 7000 is the minimum number of pixels in a region for it to be counted. Though we found some inconsistances in both implementations, we decided to used the color detection implementation for the competition. 
 
 ##### Location 2
-At location two, the shapes are detected using the camera. When the robot reaches the end of the line, it turns slightly to center itself, then based on a single frame from the camera will seperately detect the green and red shapes. It stores the detected green shape in a global value so that it can be compared against the shapes at location 3. All shape detection is done using the `shape_detect` module, using a cutoff of 7000. 
+At location 2, the shapes are detected using the camera. When the robot reaches the end of the line, it turns slightly to center itself, then based on a single frame from the camera will seperately detect the green and red shapes. It stores the detected green shape in a global value so that it can be compared against the shapes at location 3. All shape detection is done using the `shape_detect` module, using a cutoff of 7000. 
 
 ##### Location 3
 
 ### Shape detect module
+
+Shape detection is loosely based on this tutorial: https://www.pyimagesearch.com/2016/02/08/opencv-shape-detection/
+
+
 
 ### State Diagram
 
@@ -88,5 +100,7 @@ Our package uses Smach to base our robots behavior off a state machine. Run `ros
 ### References
 
 https://github.com/osrf/rosbook/blob/master/followbot/follower_p.py
+
+https://www.pyimagesearch.com/2016/02/08/opencv-shape-detection/
 
 
