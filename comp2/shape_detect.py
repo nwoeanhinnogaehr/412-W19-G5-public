@@ -32,6 +32,10 @@ def classify(c):
     return shape
 
 
+# color should be "red" or "green"
+# cutoff is # of pixels in region for it to be considered a shape
+# returns: array of names of detected shapes, either
+#   "triangle", "square" or "circle"
 def detect(image, color, cutoff=7000):
     if color == "green":
         lower = np.array([50, 50, 0]) # HSV
