@@ -1,0 +1,16 @@
+<launch>
+
+    <arg name="use_turtlebot" default="true" />
+
+    <include if="$(arg use_turtlebot)" file="$(find turtlebot_bringup)/launch/minimal.launch"/>
+    <include file="$(find turtlebot_navigation)/launch/amcl_demo.launch">
+        <arg name="map_file" value="$(find comp3)/map/map3/map.yaml" />
+    </include>
+
+    <node pkg="joy" type="joy_node" name="joystick"/>
+
+    <node pkg="comp3" name="waypoint" type="waypoint.py" args="cmd_vel:=teleop_velocity_smoother/raw_cmd_vel" output="screen"></node>
+
+    <node pkg="sound_play" name="sound_play" type="soundplay_node.py"></node>
+
+</launch>
