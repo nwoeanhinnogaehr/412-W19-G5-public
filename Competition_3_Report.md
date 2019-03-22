@@ -1,8 +1,8 @@
-Competition Report 2 - CMPUT 412
+Competition Report 3 - CMPUT 412
 ================================
 
-##### Video Demo - https://youtu.be/CbxRTOG_1IA
-##### Source Code - https://github.com/nwoeanhinnogaehr/412-W19-G5-public/tree/master/comp2
+##### Video Demo - //TODO
+##### Source Code - https://github.com/nwoeanhinnogaehr/412-W19-G5-public/tree/master/comp3
 
 ### Purpose
 
