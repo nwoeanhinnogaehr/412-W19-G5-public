@@ -34,13 +34,16 @@ at location 2. The following is an example of a single stop at location 3.
 
 Location 4, the "parking lot", consists of 8 parking spots marked by red tape, as shown in the image at the top.
 Each parking spot may contain one of two items: a billboard with a red shape (like those at location 2 and 3), or an AR tag.
+The robot should indicate with the LEDs and a sound if it finds the shape matching the green shape
+from location 2, if it finds an AR tag, or if the number of the parking spot matches a specific spot
+indicated by the TA.
 
 ### Pre-requisites
 
 This project runs on Ubuntu 16.04 with ROS Kenetic installed.
 
 Dependencies: `numpy`, `rospy`, `smach`, `smach_ros`, `cv2`, `cv_bridge`, `tf.transformations`, `imutils`,
-`aplay`
+`sound_play`
 
 Installation Instructions: Download the package `comp3` from this github repo
 and place them in your workspace.
@@ -82,7 +85,7 @@ To detect a red line, the camera looks for a certain amount of red in its line o
 the turtlebot asummes it has reached a red line and stops accordingly.
 
 ##### Location 1
-At location 1, we used two different implementations to detect how many objects were in front. The first one used the data from the laser scanner to run the `get_objects()` function. This function takes the laser scanner data and returns a list of ranges for each object found that was above the size of 60 units wide. The second implementation used the `detect(image, color, cutoff=7000)` function from the `shape_detect` library we made which returned the number of red objects that were found from the camera of the turtlebot. 7000 is the minimum number of pixels in a region for it to be counted. Though we found some inconsistencies in both implementations, we decided to used the color detection implementation for the competition. The robot will indicate the number of objects it found by playing a sound and turning on the LEDs.
+At location 1, we used two different implementations to detect how many objects were in front. The first one used the data from the laser scanner to run the `get_objects()` function. This function takes the laser scanner data and returns a list of ranges for each object found that was above the size of 60 units wide. The second implementation used the `detect(image, color, cutoff=7000)` function from the `shape_detect` library we made which returned the number of red objects that were found from the camera of the turtlebot. 7000 is the minimum number of pixels in a region for it to be counted. Though we found some inconsistencies in both implementations, we decided to used the laser scanner based detection implementation for the competition. The robot will indicate the number of objects it found by playing a sound and turning on the LEDs.
 
 ##### Location 2
 At location 2, the shapes are detected using the camera. The robot detects when it should stop by measuring the distance to the billboard with the laser scanner. When the robot reaches the end of the line, it turns slightly to center itself, then based on a single frame from the camera it will separately detect the green and red shapes. The total number of shapes detected will be indicated with a sound and by the LEDs. It stores the detected green shape in a global value so that it can be compared against the shapes at location 3. All shape detection is done using the `shape_detect` module. A cutoff of 1000 is used this time because the shapes are further away. Afterwards it turns around and drives back along the line until it reaches the main line.
@@ -92,12 +95,18 @@ At location 2, the shapes are detected using the camera. The robot detects when 
 Location 3 has 3 parts to it. The robot stops at each, turning 90 degrees to the left, and detects the red shape using the `shape_detect` module. A cutoff of 7000 is used, because the shapes are close up. If the shape matching the green shape from location 2 is found, the robot will make a "notification" sound. After the robot turns back to the main line, it backs up a bit so that it doesn't miss the next red line, which may have fallen outside the view region.
 
 ##### Location 4
-At location 4, we use waypoint navigation to drive into each parking spot. Once the turtlebot reaches a parking spot, it backs up to observe what the tag is, if any.
+
+At the off ramp, the robot switches from line following to waypoint navigation.
+We send an initial pose which is known ahead of time to set up the navigation node.
+Because of noise in sensor data, we don't know if the robot has stopped exactly at the start of the off ramp,
+but we know it is approximately in that position. To handle this, we set the covariance matrix of the pose
+to 0.01 times the identity matrix. Experimentally, this works reasonably well.
+
+We then use waypoint navigation to drive into each parking spot. Once the turtlebot reaches a parking spot, it backs up to observe what the tag is, if any.
 This was necessary because the tag was not always fully visible from within the parking spot.
 After noting what tag was there, the robot drives back into the parking spot and indicates the type of tag.
 
 TODO describe tag types
-
 
 
 ### AR tag detection
@@ -106,7 +115,10 @@ We use the `ar_track_alvar` node for detecting and estimating the pose of AR tag
 
 ### Waypoint navigation
 
-Waypoint navigation is done using the `amcl_demo` node with a map of location 4 that we made.
+Mapping is done using `gmapping`, with
+waypoint navigation performed using the `amcl_demo` node with a map of location 4 that we made.
+https://wiki.ros.org/gmapping
+
 
 ![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/comp3_map.png?raw=true)
 
