@@ -96,6 +96,20 @@ At location 4, we use waypoint navigation to drive into each parking spot. Once 
 This was necessary because the tag was not always fully visible from within the parking spot.
 After noting what tag was there, the robot drives back into the parking spot and indicates the type of tag.
 
+TODO describe tag types
+
+
+
+### AR tag detection
+
+We use the `ar_track_alvar` node for detecting and estimating the pose of AR tags: https://wiki.ros.org/ar_track_alvar
+
+### Waypoint navigation
+
+Waypoint navigation is done using the `amcl_demo` node with a map of location 4 that we made.
+
+![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/comp3_map.png?raw=true)
+
 ### Shape detect module
 
 Shape detection is based on this tutorial: https://www.pyimagesearch.com/2016/02/08/opencv-shape-detection/
