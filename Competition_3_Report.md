@@ -1,7 +1,7 @@
 Competition Report 3 - CMPUT 412
 ================================
 
-##### Video Demo - //TODO
+##### Video Demo - https://drive.google.com/drive/folders/1QauypVfodiY3RVKXmjgKpZewQg1Gy8Nf
 ##### Source Code - https://github.com/nwoeanhinnogaehr/412-W19-G5-public/tree/master/comp3
 
 ### Purpose
