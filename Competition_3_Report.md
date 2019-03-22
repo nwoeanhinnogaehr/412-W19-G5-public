@@ -108,6 +108,8 @@ After noting what tag was there, the robot drives back into the parking spot and
 
 TODO describe tag types
 
+After the robot has navigated to all parking spots, it navigates to a final waypoint located on the off ramp.
+From this point it resumes line following and completes the rest of the course.
 
 ### AR tag detection
 
