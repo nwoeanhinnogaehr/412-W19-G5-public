@@ -1,7 +1,7 @@
 Competition Report 3 - CMPUT 412
 ================================
 
-##### Video Demo - https://drive.google.com/drive/folders/1QauypVfodiY3RVKXmjgKpZewQg1Gy8Nf
+##### Video Demo - https://youtu.be/dowRymcstMw
 ##### Source Code - https://github.com/nwoeanhinnogaehr/412-W19-G5-public/tree/master/comp3
 
 ### Purpose
@@ -102,11 +102,9 @@ Because of noise in sensor data, we don't know if the robot has stopped exactly 
 but we know it is approximately in that position. To handle this, we set the covariance matrix of the pose
 to 0.01 times the identity matrix. Experimentally, this works reasonably well.
 
-We then use waypoint navigation to drive into each parking spot. Once the turtlebot reaches a parking spot, it backs up to observe what the tag is, if any.
+We then use waypoint navigation to drive into each parking spot. Once the turtlebot reaches a parking spot, it backs up to observe what the tag is, if any. 
 This was necessary because the tag was not always fully visible from within the parking spot.
-After noting what tag was there, the robot drives back into the parking spot and indicates the type of tag.
-
-TODO describe tag types
+After noting what tag was there, the robot drives back into the parking spot and indicates the type of tag. The turtlebot makes a cow sound if it detects nothing in the parking spot, a cat sound if it dectects a shape in the parking spot, and a chicken sound if it detects an AR tag in the parking spot.
 
 After the robot has navigated to all parking spots, it navigates to a final waypoint located on the off ramp.
 From this point it resumes line following and completes the rest of the course.
