@@ -7,7 +7,7 @@ Competition Report 3 - CMPUT 412
 ### Purpose
 
 This project can be used to to navigate a turtlebot around the following course, and count/detect 
-objects at each of the 3 locations.
+objects at each of the 4 locations.
 
 ![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/comp3_course.png?raw=true)
 
@@ -110,3 +110,5 @@ Our package uses Smach to base our robots behavior off a state machine. Run `ros
 https://github.com/osrf/rosbook/blob/master/followbot/follower_p.py
 
 https://www.pyimagesearch.com/2016/02/08/opencv-shape-detection/
+
+https://github.com/nwoeanhinnogaehr/412-W19-G5-public/tree/master/comp2
