@@ -9,8 +9,7 @@ Competition Report 3 - CMPUT 412
 This project can be used to to navigate a turtlebot around the following course, and count/detect 
 objects at each of the 3 locations.
 
-![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/course.png?raw=true)
-![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/course_irl.png?raw=true)
+![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/comp3_course.png?raw=true)
 
 At the first location, the turtlebot turns to the left and detects the number of objects that are in
 front of it. This will be a number between 1 and 3, and the turtlebot will make a sound of either "one", 
