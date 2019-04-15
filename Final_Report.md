@@ -60,10 +60,15 @@ and place it in your ROS kinetic workspace.
 
 ### Turtlebot Configuration
 
-For comp4, both cameras should be on the front. For comp5, the ASUS camera should be on the side.
+In addition to the ASUS camera, you will need a second external camera.
+
+See the image below for an example of the competition 4 configuration. For competition 5,
+the USB camera should be in the same spot, but the asus camera is placed on the right side instead.
 
 In both cases, the logitech camera should be centered and facing down at the steepest possible angle
-such that the foam block remains out of view.
+such that the foam block remains out of view. 
+
+![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/IMG_20190409_155607.jpg?raw=true)
 
 ### Execution
 
