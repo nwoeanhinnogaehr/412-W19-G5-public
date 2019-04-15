@@ -173,7 +173,7 @@ detection thresholds.
 
 Our package uses Smach to base our robots behavior off a state machine. Run `rosrun smach_viewer smach_viewer.py` while the robot is running to get a live view of the state diagram as shown below
 
-![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/smach.png?raw=true)
+![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/state_diagram.png?raw=true)
 
 ### References
 
