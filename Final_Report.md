@@ -1,7 +1,7 @@
 Final Report - CMPUT 412
 ================================
 
-##### Video Demo - https://youtu.be/dowRymcstMw
+##### Video Demo - https://youtu.be/f02AYBRuTwo
 ##### Source Code - [comp4](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/tree/master/comp4), [comp5](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/tree/master/comp5)
 
 ### Purpose
@@ -9,7 +9,7 @@ Final Report - CMPUT 412
 This project can be used to to navigate a turtlebot around the following course, and count/detect/manipulate
 objects at each of the 4 locations, according to a set of predefined rules.
 
-![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/comp3_course.png?raw=true)
+![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/comp4_course.png?raw=true)
 
 At the first location, the turtlebot turns to the left and detects the number of objects that are in
 front of it. This will be a number between 1 and 3, and the turtlebot will make a sound of either "one",
@@ -44,7 +44,9 @@ spots (1-5). The robot checks each spot for the appropriate AR tags, indicating 
 Next, it must push the box to the goal spot, and indicate again with the LED and a sound when it has done this.
 
 After completing these two tasks, the robot returns back to the line and continues on to location 3 (yes,
-location 4 comes before location 3).
+location 4 comes before location 3). The following is what location 4 looks like.
+
+![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/loc_2.png?raw=true)
 
 ### Pre-requisites
 
@@ -58,10 +60,16 @@ and place it in your ROS kinetic workspace.
 
 ### Turtlebot Configuration
 
-For comp4, both cameras should be on the front. For comp5, the ASUS camera should be on the side.
+In addition to the ASUS camera, you will need a second external camera. A foam block on the front
+of the robot is also needed for box pushing.
+
+See the image below for an example of the competition 4 configuration. For competition 5,
+the USB camera should be in the same spot, but the asus camera is placed on the right side instead.
 
 In both cases, the logitech camera should be centered and facing down at the steepest possible angle
-such that the foam block remains out of view.
+such that the foam block remains out of view. 
+
+![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/IMG_20190409_155607.jpg?raw=true)
 
 ### Execution
 
@@ -171,12 +179,10 @@ detection thresholds.
 
 Our package uses Smach to base our robots behavior off a state machine. Run `rosrun smach_viewer smach_viewer.py` while the robot is running to get a live view of the state diagram as shown below
 
-![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/smach.png?raw=true)
+![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/state_diagram.png?raw=true)
 
 ### References
 
 https://github.com/osrf/rosbook/blob/master/followbot/follower_p.py
 
 https://www.pyimagesearch.com/2016/02/08/opencv-shape-detection/
-
-https://github.com/nwoeanhinnogaehr/412-W19-G5-public/tree/master/comp3
