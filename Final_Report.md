@@ -1,7 +1,7 @@
 Final Report - CMPUT 412
 ================================
 
-##### Video Demo - https://youtu.be/dowRymcstMw
+##### Video Demo - https://youtu.be/f02AYBRuTwo
 ##### Source Code - [comp4](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/tree/master/comp4), [comp5](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/tree/master/comp5)
 
 ### Purpose
@@ -44,7 +44,7 @@ spots (1-5). The robot checks each spot for the appropriate AR tags, indicating 
 Next, it must push the box to the goal spot, and indicate again with the LED and a sound when it has done this.
 
 After completing these two tasks, the robot returns back to the line and continues on to location 3 (yes,
-location 4 comes before location 3).
+location 4 comes before location 3). The following is what location 4 looks like.
 
 ![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/loc_2.png?raw=true)
 
