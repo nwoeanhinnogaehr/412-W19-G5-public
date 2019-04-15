@@ -60,7 +60,8 @@ and place it in your ROS kinetic workspace.
 
 ### Turtlebot Configuration
 
-In addition to the ASUS camera, you will need a second external camera.
+In addition to the ASUS camera, you will need a second external camera. A foam block on the front
+of the robot is also needed for box pushing.
 
 See the image below for an example of the competition 4 configuration. For competition 5,
 the USB camera should be in the same spot, but the asus camera is placed on the right side instead.
