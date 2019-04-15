@@ -144,7 +144,7 @@ Finally, the robot leaves the location 4 area and returns to line following towa
 
 ### Turning
 
-Hard coded turns movements are done using a function `drive_for_dist` which integrates yaw messages
+Hard coded turn movements are done using a function `turn_turtlebot` which integrates yaw messages
 from the odometer at a fixed rate. This is significantly more accurate than turning for a specific time.
 It also avoids a problem where turns which land directly on the boundary between -PI and PI radians
 may be inaccurate due to the angle wrapping around. Without integration, a more complex method for
