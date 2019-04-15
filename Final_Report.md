@@ -186,5 +186,3 @@ Our package uses Smach to base our robots behavior off a state machine. Run `ros
 https://github.com/osrf/rosbook/blob/master/followbot/follower_p.py
 
 https://www.pyimagesearch.com/2016/02/08/opencv-shape-detection/
-
-https://github.com/nwoeanhinnogaehr/412-W19-G5-public/tree/master/comp3
