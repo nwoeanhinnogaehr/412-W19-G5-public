@@ -46,6 +46,8 @@ Next, it must push the box to the goal spot, and indicate again with the LED and
 After completing these two tasks, the robot returns back to the line and continues on to location 3 (yes,
 location 4 comes before location 3).
 
+![ui_v1.0](https://github.com/nwoeanhinnogaehr/412-W19-G5-public/blob/master/media/loc_2.JPG?raw=true)
+
 ### Pre-requisites
 
 This project runs on Ubuntu 16.04 with ROS Kenetic installed.
